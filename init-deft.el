@@ -7,9 +7,10 @@
    :after (lambda () (deft-hooks))))
          
 (defun deft-hooks () 
-  ())
+  (setq deft-directory (expand-file-name "~/docs/deft"))
+  (global-set-key [f8] 'deft))
+
 ;; eg
 ;; (setq deft-text-mode 'markdown-mode)
-;; (global-set-key [f8] 'deft)
 
 (provide 'init-deft)

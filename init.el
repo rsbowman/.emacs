@@ -60,6 +60,7 @@
 (require 'init-python-mode)
 (require 'init-auto-complete)
 (require 'init-yasnippet)
+(require 'init-deft)
 
 (el-get 'sync)
 
