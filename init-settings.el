@@ -2,8 +2,10 @@
  '(:name smex				; a better (ido like) M-x
          :after (lambda ()
                   (setq smex-save-file "~/.emacs.d/.smex-items")
-                  (global-set-key (kbd "M-x") 'smex)
-                  (global-set-key (kbd "M-X") 'smex-major-mode-commands))))
+                  (sean-set-key (kbd "M-x") 'smex)
+                  (sean-set-key (kbd "M-X") 'smex-major-mode-commands))))
+(el-get-add 
+ '(:name color-theme))
 (el-get-add 
  '(:name color-theme-zenburn
          :after
@@ -14,6 +16,7 @@
 
 
 (require 'flyspell)
+(setq flyspell-issue-welcome-flag nil)
 (add-hook 'text-mode-hook 'turn-on-flyspell)
 
 ;;; ido
@@ -34,7 +37,7 @@
   (if (looking-at whitespace-delete-re)
       (replace-match "")
     (kill-word 1)))
-(global-set-key "\ed" 'kill-word-ws)
+(sean-set-key "\ed" 'kill-word-ws)
 
 (defun unfill-paragraph ()
   "Replace newline chars in current paragraph by single spaces.
@@ -51,7 +54,7 @@ This command does the reverse of `fill-region'."
     (fill-region start end)))
 
 (require 'wc)
-(global-set-key "\C-cw" 'wc)
+(sean-set-key "\C-cw" 'wc)
 
 (autoload 'typing-speed-mode "typing-speed-mode" "Show typing speed in modeline")
 (autoload 'turn-on-typing-speed "typing-speed-mode" "Show typing speed in modeline")
@@ -76,12 +79,12 @@ This command does the reverse of `fill-region'."
 
 (put 'eval-expression 'disabled nil)
 
-(global-set-key [home] 'beginning-of-line)
-(global-set-key [end] 'end-of-line)
+(sean-set-key [home] 'beginning-of-line)
+(sean-set-key [end] 'end-of-line)
 
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-k" 'kill-region)
+(sean-set-key "\C-w" 'backward-kill-word)
+(sean-set-key "\C-x\C-k" 'kill-region)
+(sean-set-key "\C-c\C-k" 'kill-region)
 
 ; hippie exapnd
 (setq hippie-expand-try-functions-list
@@ -90,14 +93,14 @@ This command does the reverse of `fill-region'."
         try-expand-dabbrev
         try-expand-dabbrev-all-buffers
         try-expand-dabbrev-from-kill))
-(global-set-key (kbd "C-;") 'hippie-expand)
+(sean-set-key (kbd "C-;") 'hippie-expand)
 
 (setq mouse-yank-at-point t)
 
 (column-number-mode t)
 
 (setq skeleton-pair t)
-(global-set-key "\"" 'skeleton-pair-insert-maybe)
+(sean-set-key "\"" 'skeleton-pair-insert-maybe)
 
 (global-font-lock-mode t)
 
@@ -107,7 +110,11 @@ This command does the reverse of `fill-region'."
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
-(global-set-key [S-mouse-2] 'browse-url-at-mouse)
+(sean-set-key [S-mouse-2] 'browse-url-at-mouse)
+
+;; figure out when to use visual-line-mode/auto-fill-mode, possibly use
+;; https://github.com/rafl/espect/blob/master/espect.el
+
 
 (provide 'init-settings)
 
