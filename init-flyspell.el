@@ -13,11 +13,7 @@
 ;; avoid marking urls as misspelled
 ;; 
 (defun my-flyspell-predicate ()
-  (not (or (point-in-re-p "https?://[a-zA-Z0-9\\./-?&]*")
-           (point-in-re-p "ht")
-           (point-in-re-p "htt")
-           (point-in-re-p "http")
-           (point-in-re-p "https")))) ;; aaagh, really?  this is awful...
+  (not (point-in-re-p "https?://[a-zA-Z0-9\\./-?&]*")))
 
 (put 'text-mode 'flyspell-mode-predicate 'my-flyspell-predicate)
 

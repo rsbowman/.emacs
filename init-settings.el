@@ -1,19 +1,6 @@
-(el-get-add
- '(:name smex				; a better (ido like) M-x
-         :after (lambda ()
-                  (setq smex-save-file "~/.emacs.d/.smex-items")
-                  (sean-set-key (kbd "M-x") 'smex)
-                  (sean-set-key (kbd "M-X") 'smex-major-mode-commands))))
-(el-get-add 
- '(:name color-theme))
-(el-get-add 
- '(:name color-theme-zenburn
-         :after
-         (lambda ()
-           (autoload 'color-theme-zenburn "zenburn"
-             "Just some alien fruit salad to keep you in the zone." t)
-           (color-theme-zenburn))))
-
+(sean-add-package 'color-theme-zenburn)
+(require 'color-theme-zenburn)
+(color-theme-zenburn)
 
 (require 'flyspell)
 (setq flyspell-issue-welcome-flag nil)
@@ -30,6 +17,17 @@
 ;; Allow the same buffer to be open in different frames
 (setq ido-default-buffer-method 'selected-window)
 
+;; smex
+(sean-add-package 'smex)
+(require 'smex)
+(smex-initialize)
+
+(setq smex-save-file "~/.emacs.d/.smex-items")
+(sean-set-key (kbd "M-x") 'smex)
+(sean-set-key (kbd "C-x C-m") 'smex)
+(sean-set-key (kbd "C-c C-m") 'smex)
+(sean-set-key (kbd "M-X") 'smex-major-mode-commands)
+
 (defconst whitespace-delete-re
   "[ \t\n]+" "whitespace to delete")
 (defun kill-word-ws ()
@@ -37,7 +35,7 @@
   (if (looking-at whitespace-delete-re)
       (replace-match "")
     (kill-word 1)))
-(sean-set-key "\ed" 'kill-word-ws)
+(sean-set-key (kbd "M-d") 'kill-word-ws)
 
 (defun unfill-paragraph ()
   "Replace newline chars in current paragraph by single spaces.
@@ -56,9 +54,10 @@ This command does the reverse of `fill-region'."
 (require 'wc)
 (sean-set-key "\C-cw" 'wc)
 
-(autoload 'typing-speed-mode "typing-speed-mode" "Show typing speed in modeline")
-(autoload 'turn-on-typing-speed "typing-speed-mode" "Show typing speed in modeline")
-(add-hook 'text-mode-hook 'turn-on-typing-speed)
+;; this is cool but causes flickering:
+;(autoload 'typing-speed-mode "typing-speed-mode" "Show typing speed in modeline")
+;(autoload 'turn-on-typing-speed "typing-speed-mode" "Show typing speed in modeline")
+;(add-hook 'text-mode-hook 'turn-on-typing-speed)
 
 ;; run catdoc on .doc files
 (defun find-file-catdoc-hook ()
@@ -76,6 +75,13 @@ This command does the reverse of `fill-region'."
       (auto-fill-mode -1))))
 (add-hook 'text-mode-hook 'doc-file-hook)
 
+;;
+(defun sean-add-watchwords ()
+  (font-lock-add-keywords
+   nil '(("\\<\\(XXX\\|FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
+          1 font-lock-warning-face t))))
+(add-hook 'prog-mode-hook 'sean-add-watchwords)
+;;
 
 (put 'eval-expression 'disabled nil)
 
@@ -115,6 +121,15 @@ This command does the reverse of `fill-region'."
 ;; figure out when to use visual-line-mode/auto-fill-mode, possibly use
 ;; https://github.com/rafl/espect/blob/master/espect.el
 
+(require 'hl-tags-mode)
+
+(defun tbs-synonyms (&optional b e) 
+  (interactive "r")
+  (shell-command-on-region b e "tbsapi.py -s" (current-buffer) t))
+
+(defun tbs-favorites (&optional b e)
+  (interactive "r")
+  (shell-command-on-region b e "tbsapi.py -s" (current-buffer) t))
 
 (provide 'init-settings)
 

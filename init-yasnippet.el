@@ -1,8 +1,9 @@
-(el-get-add '(:name yasnippet
-                    :after (lambda () (my-yasnippet-hook))))
+(sean-add-package 'yasnippet)
 
-(defun my-yasnippet-hook () 
-  (setq yas/root-directory (expand-file-name "~/.emacs.d/snippets"))
-  (yas/load-directory yas/root-directory))
+(require 'yasnippet)
+(yas/initialize)
+(setq yas/root-directory (expand-file-name "~/.emacs.d/snippets"))
+(yas/load-directory yas/root-directory)
+(yas/global-mode)
 
 (provide 'init-yasnippet)

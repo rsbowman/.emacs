@@ -1,3 +1,3 @@
-(el-get-add '(:name php-mode))
+(sean-add-package 'php-mode)
 
 (provide 'init-php-mode)

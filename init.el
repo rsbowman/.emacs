@@ -1,7 +1,22 @@
 ;; Sean's emacs init file
 ;; great sources: https://github.com/purcell/emacs.d
-;;
+;; https://github.com/technomancy/emacs-starter-kit
 (push "/usr/local/bin" exec-path)
+
+;; package.el stuff
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa"))
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defun sean-add-package (p)
+  (when (not (package-installed-p p))
+    (package-install p)))
+;;;
 
 (setq make-backup-files nil)
 (setq auto-save-default nil)
@@ -35,35 +50,19 @@
                  collecting (expand-file-name dir))
            load-path))))
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (end-of-buffer)
-     (eval-print-last-sexp))))
-
-(setq el-get-sources ())
-(defun el-get-add (descr)
-  (add-to-list 'el-get-sources descr 1))
-
 ;; minor mode to hold my global key bindings
 (defvar seans-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 
 (defun sean-set-key (key fn)
   (define-key seans-keys-minor-mode-map key fn))
 
-;(el-get-add '(:name package))
-
 (require 'init-settings)
 (require 'init-python-mode)
-(require 'init-auto-complete)
+(require 'init-php-mode)
 (require 'init-yasnippet)
+(require 'init-auto-complete)
 (require 'init-deft)
 (require 'init-latex)
-
-(el-get 'sync)
 
 ;; Instead of this:
 ;(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
@@ -84,6 +83,6 @@
 
 (add-hook 'minibuffer-setup-hook 'my-minibuffer-setup-hook)
 
-
 (setq default-major-mode 'text-mode)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
+
