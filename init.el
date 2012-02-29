@@ -65,6 +65,8 @@
 (require 'init-auto-complete)
 (require 'init-deft)
 (require 'init-latex)
+(require 'init-org)
+(require 'init-compile)
 
 ;; Instead of this:
 ;(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
