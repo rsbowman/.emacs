@@ -6,8 +6,10 @@
 ;; package.el stuff
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/elpa"))
 (require 'package)
+;(add-to-list 'package-archives
+;             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -60,6 +62,7 @@
 
 (require 'init-settings)
 (require 'init-python-mode)
+(require 'init-ruby-mode)
 (require 'init-php-mode)
 (require 'init-yasnippet)
 (require 'init-auto-complete)
@@ -89,15 +92,3 @@
 
 (setq default-major-mode 'text-mode)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
-
-
-
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(when
-    (load
-     (expand-file-name "~/.emacs.d/elpa/package.el"))
-  (package-initialize))

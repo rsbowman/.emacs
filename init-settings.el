@@ -1,6 +1,9 @@
-(sean-add-package 'color-theme-zenburn)
-(require 'color-theme-zenburn)
-(color-theme-zenburn)
+(sean-add-package 'zenburn-theme)
+;(require 'zenburn-theme)
+;(color-theme-zenburn)
+
+(sean-add-package 'solarized-theme)
+(load-theme 'solarized-dark t)
 
 (require 'flyspell)
 (setq flyspell-issue-welcome-flag nil)
