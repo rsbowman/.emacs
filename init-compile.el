@@ -9,7 +9,8 @@
     ;; then bury the *compilation* buffer, so that C-x b doesn't go there
     (bury-buffer)
     ;; and delete the *compilation* window
-    (delete-window (get-buffer-window (get-buffer "*compilation*"))))
+    ;(delete-window (get-buffer-window (get-buffer "*compilation*")))
+    )
   ;; Always return the anticipated result of compilation-exit-message-function
   (cons msg code))
 ;; Specify my function (maybe I should have done a lambda function)
