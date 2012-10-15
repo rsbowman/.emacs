@@ -1,9 +1,9 @@
 (sean-add-package 'yasnippet)
 
 (require 'yasnippet)
-(setq yas/root-directory (expand-file-name "~/.emacs.d/snippets"))
-(yas/initialize)
-(yas/load-directory yas/root-directory)
-(yas/global-mode t)
+(setq yas-snippet-dirs
+   '("~/.emacs.d/snippets"))
+(yas-global-mode 1)
+(setq yas/indent-line nil)
 
 (provide 'init-yasnippet)
