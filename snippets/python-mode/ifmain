@@ -1,4 +1,5 @@
 #name : if __name__ == '__main__': ...
+#expand-env: ((yas/indent-line 'fixed))
 # --
 import sys
 
