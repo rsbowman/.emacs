@@ -97,11 +97,11 @@ This command does the reverse of `fill-region'."
 
 ; hippie exapnd
 (setq hippie-expand-try-functions-list
-      '(try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-dabbrev
+      '(try-expand-dabbrev
         try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill))
+        try-expand-dabbrev-from-kill
+        try-complete-file-name-partially
+        try-complete-file-name))
 (sean-set-key (kbd "C-;") 'hippie-expand)
 
 (setq mouse-yank-at-point t)
@@ -133,6 +133,8 @@ This command does the reverse of `fill-region'."
 (defun tbs-favorites (&optional b e)
   (interactive "r")
   (shell-command-on-region b e "tbsapi.py -s" (current-buffer) t))
+
+(global-unset-key (kbd "C-z"))
 
 (provide 'init-settings)
 
