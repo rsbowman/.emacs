@@ -1,19 +1,11 @@
 (global-set-key [f9] 'compile)
 
-;; from http://www.emacswiki.org/emacs/ModeCompile
-;; Helper for compilation. Close the compilation window if
-;; there was no error at all.
-(defun compilation-exit-autoclose (status code msg)
-  ;; If M-x compile exists with a 0
-  (when (and (eq status 'exit) (zerop code))
-    ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-    (bury-buffer)
-    ;; and delete the *compilation* window
-    ;(delete-window (get-buffer-window (get-buffer "*compilation*")))
-    )
-  ;; Always return the anticipated result of compilation-exit-message-function
-  (cons msg code))
-;; Specify my function (maybe I should have done a lambda function)
-(setq compilation-exit-message-function 'compilation-exit-autoclose)
+(setq compilation-finish-functions 'compile-autoclose)
+(defun compile-autoclose (buffer string)
+  (cond ((string-match "finished" string)
+         (bury-buffer "*compilation*")
+         (winner-undo)
+         (message "Build successful."))
+        (t (message "Compilation exited abnormally: %s" string))))
 
 (provide 'init-compile)
