@@ -60,6 +60,11 @@
 (defun sean-set-key (key fn)
   (define-key seans-keys-minor-mode-map key fn))
 
+; per computer configuration
+(let ((per-computer-config (concat "init-" (system-name) ".el")))
+  (if (file-exists-p per-computer-config)
+      (load-file per-computer-config)))
+
 (require 'init-settings)
 (require 'init-python-mode)
 (require 'init-ruby-mode)
@@ -71,11 +76,6 @@
 (require 'init-org)
 (require 'init-compile)
 (require 'init-markdown)
-
-; per computer configuration
-(let ((per-computer-config (concat "init-" (system-name) ".el")))
-  (if (file-exists-p per-computer-config)
-      (load-file per-computer-config)))
 
 ;; Instead of this:
 ;(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
