@@ -110,6 +110,9 @@ This command does the reverse of `fill-region'."
 
 (setq skeleton-pair t)
 (sean-set-key "\"" 'skeleton-pair-insert-maybe)
+;(sean-set-key "{" 'skeleton-pair-insert-maybe)
+;(sean-set-key "[" 'skeleton-pair-insert-maybe)
+;(sean-set-key "(" 'skeleton-pair-insert-maybe)
 
 (global-font-lock-mode t)
 
@@ -135,6 +138,8 @@ This command does the reverse of `fill-region'."
   (shell-command-on-region b e "tbsapi.py -s" (current-buffer) t))
 
 (global-unset-key (kbd "C-z"))
+
+(when (fboundp 'winner-mode) (winner-mode 1))
 
 (provide 'init-settings)
 
