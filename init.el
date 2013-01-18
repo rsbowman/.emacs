@@ -61,9 +61,11 @@
   (define-key seans-keys-minor-mode-map key fn))
 
 ; per computer configuration
-(let ((per-computer-config (concat "init-" (system-name) ".el")))
+(let ((per-computer-config 
+       (expand-file-name (concat "~/.emacs.d/init-" (system-name) ".el"))))
   (if (file-exists-p per-computer-config)
-      (load-file per-computer-config)))
+      (load per-computer-config)
+    (error "no per computer config %s found!" per-computer-config)))
 
 (require 'init-settings)
 (require 'init-python-mode)
