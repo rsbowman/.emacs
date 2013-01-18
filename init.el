@@ -65,13 +65,17 @@
 (require 'init-ruby-mode)
 (require 'init-php-mode)
 (require 'init-yasnippet)
-(require 'init-auto-complete)
+;(require 'init-auto-complete)
 (require 'init-deft)
 (require 'init-latex)
 (require 'init-org)
 (require 'init-compile)
 (require 'init-markdown)
-(require 'init-scala-mode)
+
+; per computer configuration
+(let ((per-computer-config (concat "init-" (system-name) ".el")))
+  (if (file-exists-p per-computer-config)
+      (load-file per-computer-config)))
 
 ;; Instead of this:
 ;(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
