@@ -3,6 +3,10 @@
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
+(setq org-hide-leading-stars t)
+(setq org-startup-indented t)
+(setq org-startup-folded nil)
+
 ; org latex export
 ;; (require 'org-latex)
 ;; (unless (boundp 'org-export-latex-classes)
