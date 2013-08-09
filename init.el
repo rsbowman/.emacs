@@ -20,7 +20,20 @@
     (package-install p)))
 ;;;
 
-(setq make-backup-files nil)
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.emacs-backup-saves")) ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   version-control t)       ; use versioned backups
+
+(defun force-backup-of-buffer ()
+    (let ((buffer-backed-up nil))
+      (backup-buffer)))
+
+(add-hook 'before-save-hook  'force-backup-of-buffer)
+
 (setq auto-save-default nil)
 (setq-default tab-width 2)
 (setq-default indent-tabs-mode nil)
