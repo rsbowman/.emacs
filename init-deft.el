@@ -1,7 +1,9 @@
 (sean-add-package 'deft)
 
-(setq deft-extension "org")
+(require 'deft)
+
 (setq deft-text-mode 'org-mode)
+(setq deft-extension "org")
 (global-set-key [f8] 'deft)
 
 (provide 'init-deft)
