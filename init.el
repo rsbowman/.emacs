@@ -56,7 +56,7 @@
 (require 'cl)
 
 ;; add load paths
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp/"))
 (let* ((my-lisp-dir "~/.emacs.d/site-lisp/")
        (default-directory my-lisp-dir))
   (progn
@@ -75,7 +75,7 @@
 
 ; per computer configuration
 (let ((per-computer-config 
-       (expand-file-name (concat "~/.emacs.d/init-" (system-name) ".el"))))
+       (expand-file-name (concat "~/.emacs.d/lisp/init-" (system-name) ".el"))))
   (if (file-exists-p per-computer-config)
       (load per-computer-config)
     (error "no per computer config %s found!" per-computer-config)))
@@ -113,3 +113,15 @@
 
 (setq default-major-mode 'text-mode)
 (add-hook 'text-mode-hook 'text-mode-hook-identify)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values (quote ((TeX-master . t)))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
